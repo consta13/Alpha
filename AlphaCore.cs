@@ -181,7 +181,7 @@ namespace Alpha
 				Thread.Sleep(30 + random.Next(Settings.BotInputFrequency));				
 			}
 		}
-
+		
 		public override Job Tick()
 		{
 
