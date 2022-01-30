@@ -28,13 +28,16 @@ namespace Alpha
         /// </summary>
         public int AttemptCount { get; set; }
 
+        public uint EntityId { get; set; }
 
 
-        public TaskNode(Vector3 position, int bounds, TaskNodeType type = TaskNodeType.Movement)
+
+        public TaskNode(Vector3 position, int bounds, TaskNodeType type = TaskNodeType.Movement, uint entityId = 0)
         {
             WorldPosition = position;
             Type = type;
             Bounds = bounds;
+            EntityId = entityId;
         }
     }
 }

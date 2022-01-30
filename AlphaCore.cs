@@ -169,9 +169,9 @@ namespace Alpha
 		}
 
 
-		private void MouseoverItem(Entity item)
+		private void MouseoverItem(uint itemId)
 		{
-			var uiLoot = GameController.IngameState.IngameUi.ItemsOnGroundLabels.FirstOrDefault(I => I.IsVisible && I.ItemOnGround.Id == item.Id);
+			var uiLoot = GameController.IngameState.IngameUi.ItemsOnGroundLabels.FirstOrDefault(I => I.IsVisible && I.ItemOnGround.Id == itemId);
 			if (uiLoot != null)
 			{
 				var clickPos = uiLoot.Label.GetClientRect().Center;
@@ -339,7 +339,7 @@ namespace Alpha
 								switch (targetInfo.isTargeted)
 								{
 									case false:
-										MouseoverItem(questLoot);
+										MouseoverItem(questLoot.Id);
 										break;
 									case true:
 										Thread.Sleep(25);
@@ -492,9 +492,10 @@ namespace Alpha
 					.Where(e => e.GetComponent<WorldItem>() != null)
 					.FirstOrDefault(e =>
 					{
-						Entity itemEntity = e.GetComponent<WorldItem>().ItemEntity;
-						return GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName ==
-								"QuestItem";
+						var itemEntity = e.GetComponent<WorldItem>().ItemEntity;
+						return itemEntity.CacheComp.ContainsKey("HeistObjective")
+								|| GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName == "StackableCurrency"
+								|| GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName == "QuestItem";
 					});
 			}
 			catch
