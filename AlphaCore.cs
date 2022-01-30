@@ -333,7 +333,7 @@ namespace Alpha
 							Input.KeyUp(Settings.MovementKey);
 							Thread.Sleep(Settings.BotInputFrequency);
 							//Pause for long enough for movement to hopefully be finished.
-							if (questLoot != null)
+							/*if (questLoot != null)
 							{
 								var targetInfo = questLoot.GetComponent<Targetable>();
 								switch (targetInfo.isTargeted)
@@ -352,8 +352,8 @@ namespace Alpha
 							}
 
 							break;
-						}
-					/*var targetInfo = questLoot.GetComponent<Targetable>();
+						}*/
+					var targetInfo = questLoot.GetComponent<Targetable>();
 					if (!targetInfo.isTargeted)
 						MouseoverItem(questLoot.Id);
 					if (targetInfo.isTargeted)
@@ -365,7 +365,7 @@ namespace Alpha
 						nextBotAction = DateTime.Now.AddSeconds(1);
 					}
 					break;
-				}*/
+				}
 					case TaskNodeType.Transition:
 						{
 							nextBotAction = DateTime.Now.AddMilliseconds(Settings.BotInputFrequency * 2 + random.Next(Settings.BotInputFrequency));
