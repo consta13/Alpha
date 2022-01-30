@@ -176,8 +176,8 @@ namespace Alpha
 			{
 				var clickPos = uiLoot.Label.GetClientRect().Center;
 				Mouse.SetCursorPos(new Vector2(
-					clickPos.X + random.Next(-15, 15),
-					clickPos.Y + random.Next(-7, 7)));
+					clickPos.X + random.Next(-4, 4),
+					clickPos.Y + random.Next(-4, 4)));
 				Thread.Sleep(30 + random.Next(Settings.BotInputFrequency));				
 			}
 		}
@@ -333,24 +333,17 @@ namespace Alpha
 							Input.KeyUp(Settings.MovementKey);
 							Thread.Sleep(Settings.BotInputFrequency);
 							//Pause for long enough for movement to hopefully be finished.
-							if (questLoot != null)
+							var targetInfo = questLoot.GetComponent<Targetable>();
+							if (!targetInfo.isTargeted)
+								MouseoverItem(questLoot.Id);
+							if (targetInfo.isTargeted)
 							{
-								var targetInfo = questLoot.GetComponent<Targetable>();
-								switch (targetInfo.isTargeted)
-								{
-									case false:
-										MouseoverItem(questLoot.Id);
-										break;
-									case true:
-										Thread.Sleep(25);
-										Mouse.LeftMouseDown();
-										Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
-										Mouse.LeftMouseUp();
-										nextBotAction = DateTime.Now.AddSeconds(1);
-										break;
-								}
+								Thread.Sleep(25);
+								Mouse.LeftMouseDown();
+								Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
+								Mouse.LeftMouseUp();
+								nextBotAction = DateTime.Now.AddSeconds(1);
 							}
-
 							break;
 						}
 					case TaskNodeType.Transition:
