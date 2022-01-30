@@ -245,11 +245,11 @@ namespace Alpha
 					//Check if we should add quest loot logic. We're close to leader already
 					var questLoot = GetLootableQuestItem();
 					if (questLoot != null &&
-						Vector3.Distance(GameController.Player.Pos, questLoot.Pos) < Settings.ClearPathDistance.Value &&
+						Vector3.Distance(followTarget.Pos, questLoot.Pos) < Settings.ClearPathDistance.Value &&
 						tasks.FirstOrDefault(I => I.Type == TaskNodeType.Loot) == null)
 						tasks.Add(new TaskNode(questLoot.Pos, Settings.ClearPathDistance, TaskNodeType.Loot));
 
-					else if (!hasUsedWp && Settings.TakeWaypoints)
+					/*else if (!hasUsedWp && Settings.TakeWaypoints)
 					{
 						//Check if there's a waypoint nearby
 						var waypoint = GameController.EntityListWrapper.Entities.SingleOrDefault(I => I.Type == ExileCore.Shared.Enums.EntityType.Waypoint &&
@@ -261,7 +261,7 @@ namespace Alpha
 							tasks.Add(new TaskNode(waypoint.Pos, Settings.ClearPathDistance, TaskNodeType.ClaimWaypoint));
 						}
 
-					}
+					}*/
 
 				}
 				lastTargetPosition = followTarget.Pos;
@@ -333,7 +333,7 @@ namespace Alpha
 							Input.KeyUp(Settings.MovementKey);
 							Thread.Sleep(Settings.BotInputFrequency);
 							//Pause for long enough for movement to hopefully be finished.
-							/*if (questLoot != null)
+							if (questLoot != null)
 							{
 								var targetInfo = questLoot.GetComponent<Targetable>();
 								switch (targetInfo.isTargeted)
@@ -352,20 +352,20 @@ namespace Alpha
 							}
 
 							break;
+						}
+							/*var targetInfo = questLoot.GetComponent<Targetable>();
+							if (!targetInfo.isTargeted)
+								MouseoverItem(questLoot.Id);
+							if (targetInfo.isTargeted)
+							{
+								Thread.Sleep(25);
+								Mouse.LeftMouseDown();
+								Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
+								Mouse.LeftMouseUp();
+								nextBotAction = DateTime.Now.AddSeconds(1);
+							}
+							break;
 						}*/
-					var targetInfo = questLoot.GetComponent<Targetable>();
-					if (!targetInfo.isTargeted)
-						MouseoverItem(questLoot.Id);
-					if (targetInfo.isTargeted)
-					{
-						Thread.Sleep(25);
-						Mouse.LeftMouseDown();
-						Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
-						Mouse.LeftMouseUp();
-						nextBotAction = DateTime.Now.AddSeconds(1);
-					}
-					break;
-				}
 					case TaskNodeType.Transition:
 						{
 							nextBotAction = DateTime.Now.AddMilliseconds(Settings.BotInputFrequency * 2 + random.Next(Settings.BotInputFrequency));
