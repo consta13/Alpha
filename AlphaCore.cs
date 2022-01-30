@@ -177,7 +177,7 @@ namespace Alpha
 				var clickPos = uiLoot.Label.GetClientRect().Center;
 				Mouse.SetCursorPos(new Vector2(
 					clickPos.X + random.Next(-15, 15),
-					clickPos.Y + random.Next(-10, 10)));
+					clickPos.Y + random.Next(-7, 7)));
 				Thread.Sleep(30 + random.Next(Settings.BotInputFrequency));				
 			}
 		}
@@ -553,8 +553,8 @@ namespace Alpha
 				}
 			var dist = tasks?.Count > 0 ? Vector3.Distance(GameController.Player.Pos, tasks.First().WorldPosition): 0;
 			var targetDist = Vector3.Distance(GameController.Player.Pos, lastTargetPosition).ToString(CultureInfo.InvariantCulture);
-			Graphics.DrawText($"Follow Enabled: {Settings.IsFollowEnabled.Value}", new Vector2(500, 120));
-			Graphics.DrawText($"Task Count: {tasks?.Count} Next WP Distance: {dist} Target Distance: {targetDist}", new Vector2(500, 140));
+			Graphics.DrawText($"Follow: {Settings.IsFollowEnabled.Value}", new Vector2(500, 120));
+			// Graphics.DrawText($"Task Count: {tasks?.Count} Next WP Distance: {dist} Target Distance: {targetDist}", new Vector2(500, 140));
 			var counter = 0;
 			foreach (var transition in areaTransitions)
 			{
