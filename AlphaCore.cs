@@ -245,7 +245,7 @@ namespace Alpha
 					//Check if we should add quest loot logic. We're close to leader already
 					var questLoot = GetLootableQuestItem();
 					if (questLoot != null &&
-						distanceFromFollower <= 100 &&
+						/*distanceFromFollower <= 100 &&*/
 						Vector3.Distance(GameController.Player.Pos, questLoot.Pos) < Settings.ClearPathDistance.Value &&
 						/*distanceFromFollower <= Settings.PathfindingNodeDistance.Value &&*/
 						tasks.FirstOrDefault(I => I.Type == TaskNodeType.Loot) == null)
@@ -389,7 +389,7 @@ namespace Alpha
 								Input.KeyUp(Settings.MovementKey);
 							}
 							currentTask.AttemptCount++;
-							if (currentTask.AttemptCount > 3)
+							if (currentTask.AttemptCount > 10)
 								tasks.RemoveAt(0);
 							break;
 						}
@@ -509,7 +509,7 @@ namespace Alpha
 					{
 						var itemEntity = e.GetComponent<WorldItem>().ItemEntity;
 						return itemEntity.CacheComp.ContainsKey("HeistObjective")
-								|| GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName == "StackableCurrency"
+								/*|| GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName == "StackableCurrency"*/
 								|| GameController.Files.BaseItemTypes.Translate(itemEntity.Path).ClassName == "QuestItem";
 					});
 			}
