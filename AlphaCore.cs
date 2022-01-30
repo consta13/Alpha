@@ -333,19 +333,39 @@ namespace Alpha
 							Input.KeyUp(Settings.MovementKey);
 							Thread.Sleep(Settings.BotInputFrequency);
 							//Pause for long enough for movement to hopefully be finished.
-							var targetInfo = questLoot.GetComponent<Targetable>();
-							if (!targetInfo.isTargeted)
-								MouseoverItem(questLoot.Id);
-							if (targetInfo.isTargeted)
+							if (questLoot != null)
 							{
-								Thread.Sleep(25);
-								Mouse.LeftMouseDown();
-								Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
-								Mouse.LeftMouseUp();
-								nextBotAction = DateTime.Now.AddSeconds(1);
+								var targetInfo = questLoot.GetComponent<Targetable>();
+								switch (targetInfo.isTargeted)
+								{
+									case false:
+										MouseoverItem(questLoot.Id);
+										break;
+									case true:
+										Thread.Sleep(25);
+										Mouse.LeftMouseDown();
+										Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
+										Mouse.LeftMouseUp();
+										nextBotAction = DateTime.Now.AddSeconds(1);
+										break;
+								}
 							}
+
 							break;
 						}
+					/*var targetInfo = questLoot.GetComponent<Targetable>();
+					if (!targetInfo.isTargeted)
+						MouseoverItem(questLoot.Id);
+					if (targetInfo.isTargeted)
+					{
+						Thread.Sleep(25);
+						Mouse.LeftMouseDown();
+						Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
+						Mouse.LeftMouseUp();
+						nextBotAction = DateTime.Now.AddSeconds(1);
+					}
+					break;
+				}*/
 					case TaskNodeType.Transition:
 						{
 							nextBotAction = DateTime.Now.AddMilliseconds(Settings.BotInputFrequency * 2 + random.Next(Settings.BotInputFrequency));
