@@ -176,8 +176,8 @@ namespace Alpha
 			{
 				var clickPos = uiLoot.Label.GetClientRect().Center;
 				Mouse.SetCursorPos(new Vector2(
-					clickPos.X + random.Next(-4, 4),
-					clickPos.Y + random.Next(-4, 4)));
+					clickPos.X + random.Next(17, 24),
+					clickPos.Y + random.Next(-15, 15)));
 				Thread.Sleep(30 + random.Next(Settings.BotInputFrequency));				
 			}
 		}
