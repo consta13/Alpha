@@ -245,7 +245,7 @@ namespace Alpha
 					//Check if we should add quest loot logic. We're close to leader already
 					var questLoot = GetLootableQuestItem();
 					if (questLoot != null &&
-						Vector3.Distance(followTarget.Pos, questLoot.Pos) < Settings.ClearPathDistance.Value &&
+						Vector3.Distance(followTarget.Pos, questLoot.Pos) < 10/*Settings.ClearPathDistance.Value*/ &&
 						tasks.FirstOrDefault(I => I.Type == TaskNodeType.Loot) == null)
 						tasks.Add(new TaskNode(questLoot.Pos, Settings.ClearPathDistance, TaskNodeType.Loot));
 
