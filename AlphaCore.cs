@@ -209,7 +209,7 @@ namespace Alpha
 				{
 					//Leader moved VERY far in one frame. Check for transition to use to follow them.
 					var distanceMoved = Vector3.Distance(lastTargetPosition, followTarget.Pos);
-					if (lastTargetPosition != Vector3.Zero && distanceMoved > Settings.ClearPathDistance.Value)
+					if (lastTargetPosition != Vector3.Zero && distanceMoved > Settings.ClearPathDistance.Value && Settings.TransitionAreas)
 					{
 						var transition = areaTransitions.Values.OrderBy(I => Vector3.Distance(lastTargetPosition, I.Pos)).FirstOrDefault();
 						if (transition != null && Vector3.Distance(lastTargetPosition, transition.Pos) < Settings.ClearPathDistance.Value)
@@ -348,7 +348,7 @@ namespace Alpha
 										Mouse.LeftMouseDown();
 										Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
 										Mouse.LeftMouseUp();
-										nextBotAction = DateTime.Now.AddSeconds(1);
+										nextBotAction = DateTime.Now.AddMilliseconds(200);
 										break;
 								}
 							}
@@ -569,14 +569,14 @@ namespace Alpha
 				}
 			var dist = tasks?.Count > 0 ? Vector3.Distance(GameController.Player.Pos, tasks.First().WorldPosition): 0;
 			var targetDist = Vector3.Distance(GameController.Player.Pos, lastTargetPosition).ToString(CultureInfo.InvariantCulture);
-			Graphics.DrawText($"Follow: {Settings.IsFollowEnabled.Value}", new Vector2(500, 120));
+			Graphics.DrawText($"Follow: {Settings.IsFollowEnabled.Value}", new Vector2(20, 80));
 			// Graphics.DrawText($"Task Count: {tasks?.Count} Next WP Distance: {dist} Target Distance: {targetDist}", new Vector2(500, 140));
-			var counter = 0;
+			/*var counter = 0;
 			foreach (var transition in areaTransitions)
 			{
 				counter++;
 				Graphics.DrawText($"{transition.Key} at { transition.Value.Pos.X} { transition.Value.Pos.Y}", new Vector2(100, 120 + counter * 20));
-			}
+			}*/
 		}
 
 

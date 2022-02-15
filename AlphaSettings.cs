@@ -22,8 +22,10 @@ namespace Alpha
 		[Menu("Follow Close")] public ToggleNode IsCloseFollowEnabled { get; set; } = new ToggleNode(false);
 		
 		[Menu("Take Waypoints")] public ToggleNode TakeWaypoints { get; set; } = new ToggleNode(false);
-		
-		
+
+		[Menu("Transition Areas")] public ToggleNode TransitionAreas { get; set; } = new ToggleNode(false);
+
+
 
 	}
 }
