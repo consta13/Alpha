@@ -348,7 +348,7 @@ namespace Alpha
 										Mouse.LeftMouseDown();
 										Thread.Sleep(25 + random.Next(Settings.BotInputFrequency));
 										Mouse.LeftMouseUp();
-										nextBotAction = DateTime.Now.AddMilliseconds(200);
+										nextBotAction = DateTime.Now.AddMilliseconds(50);
 										break;
 								}
 							}
