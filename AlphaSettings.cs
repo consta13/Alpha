@@ -25,7 +25,5 @@ namespace Alpha
 
 		[Menu("Transition Areas")] public ToggleNode TransitionAreas { get; set; } = new ToggleNode(false);
 
-
-
 	}
 }

@@ -560,7 +560,7 @@ namespace Alpha
 
 		public override void Render()
 		{
-			if (tasks != null && tasks.Count > 1)
+			/*if (tasks != null && tasks.Count > 1)
 				for (var i = 1; i < tasks.Count; i++)
 				{
 					var start = WorldToValidScreenPosition(tasks[i - 1].WorldPosition);
@@ -568,7 +568,7 @@ namespace Alpha
 					Graphics.DrawLine(start, end, 2, SharpDX.Color.Pink);
 				}
 			var dist = tasks?.Count > 0 ? Vector3.Distance(GameController.Player.Pos, tasks.First().WorldPosition): 0;
-			var targetDist = Vector3.Distance(GameController.Player.Pos, lastTargetPosition).ToString(CultureInfo.InvariantCulture);
+			var targetDist = Vector3.Distance(GameController.Player.Pos, lastTargetPosition).ToString(CultureInfo.InvariantCulture);*/
 			Graphics.DrawText($"Follow: {Settings.IsFollowEnabled.Value}", new Vector2(20, 80));
 			// Graphics.DrawText($"Task Count: {tasks?.Count} Next WP Distance: {dist} Target Distance: {targetDist}", new Vector2(500, 140));
 			/*var counter = 0;
