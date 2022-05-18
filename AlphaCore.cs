@@ -213,9 +213,11 @@ namespace Alpha
 					{
 						var transition = areaTransitions.Values.OrderBy(I => Vector3.Distance(lastTargetPosition, I.Pos)).FirstOrDefault();
 						if (transition != null && Vector3.Distance(lastTargetPosition, transition.Pos) < Settings.ClearPathDistance.Value)
-							tasks.Add(new TaskNode(transition.Pos, 200, TaskNodeType.Transition));
+							Thread.Sleep(2500);
+							//tasks.Add(new TaskNode(transition.Pos, 200, TaskNodeType.Transition));
 					}
 					//We have no path, set us to go to leader pos.
+					//else if (tasks.Count == 0)
 					else if (tasks.Count == 0)
 						tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
 					//We have a path. Check if the last task is far enough away from current one to add a new task node.
