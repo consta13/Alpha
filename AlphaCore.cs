@@ -80,12 +80,13 @@ namespace Alpha
 
 			//Load initial transitions!
 
-			foreach (var transition in GameController.EntityListWrapper.Entities.Where(I => I.Type == ExileCore.Shared.Enums.EntityType.AreaTransition ||
+			/*foreach (var transition in GameController.EntityListWrapper.Entities.Where(I => I.Type == ExileCore.Shared.Enums.EntityType.AreaTransition ||
 			 I.Type == ExileCore.Shared.Enums.EntityType.Portal ||
-			 I.Type == ExileCore.Shared.Enums.EntityType.TownPortal).ToList())
+			 I.Type == ExileCore.Shared.Enums.EntityType.TownPortal).ToList())*/
+			foreach (var transition in GameController.EntityListWrapper.Entities.Where(I => I.Type == ExileCore.Shared.Enums.EntityType.Portal).ToList())
 			{
-				if(!areaTransitions.ContainsKey(transition.Id))
-					areaTransitions.Add(transition.Id, transition);
+			if(!areaTransitions.ContainsKey(transition.Id))
+				areaTransitions.Add(transition.Id, transition);
 			}
 
 
@@ -213,8 +214,7 @@ namespace Alpha
 					{
 						var transition = areaTransitions.Values.OrderBy(I => Vector3.Distance(lastTargetPosition, I.Pos)).FirstOrDefault();
 						if (transition != null && Vector3.Distance(lastTargetPosition, transition.Pos) < Settings.ClearPathDistance.Value)
-							Thread.Sleep(2500);
-							//tasks.Add(new TaskNode(transition.Pos, 200, TaskNodeType.Transition));
+							tasks.Add(new TaskNode(transition.Pos, 200, TaskNodeType.Transition));
 					}
 					//We have no path, set us to go to leader pos.
 					//else if (tasks.Count == 0)
@@ -273,6 +273,7 @@ namespace Alpha
 			//Leader is null but we have tracked them this map.
 			//Try using transition to follow them to their map
 			else if (tasks.Count == 0 &&
+				Settings.TransitionAreas &&
 				lastTargetPosition != Vector3.Zero)
 			{
 
