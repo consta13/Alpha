@@ -217,14 +217,15 @@ namespace Alpha
 							tasks.Add(new TaskNode(transition.Pos, 200, TaskNodeType.Transition));
 					}
 					//We have no path, set us to go to leader pos.
-					//else if (tasks.Count == 0)
-					else if (tasks.Count == 0)
+					//else if (tasks.Count == 0)  // 8.16
+					else if (tasks.Count == 0 && distanceMoved < Settings.ClearPathDistance.Value )
 						tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
 					//We have a path. Check if the last task is far enough away from current one to add a new task node.
 					else
 					{
 						var distanceFromLastTask = Vector3.Distance(tasks.Last().WorldPosition, followTarget.Pos);
-						if (distanceFromLastTask >= Settings.PathfindingNodeDistance)
+						// if (distanceFromLastTask >= Settings.PathfindingNodeDistance && distanceMoved < Settings.ClearPathDistance.Value)  // 8.16
+						if (distanceFromLastTask >= Settings.PathfindingNodeDistance && distanceMoved < Settings.ClearPathDistance.Value)
 							tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
 					}
 				}
