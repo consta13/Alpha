@@ -224,7 +224,7 @@ namespace Alpha
 					else
 					{
 						var distanceFromLastTask = Vector3.Distance(tasks.Last().WorldPosition, followTarget.Pos);
-						// if (distanceFromLastTask >= Settings.PathfindingNodeDistance && distanceMoved < Settings.ClearPathDistance.Value)  // 8.16
+						// if (distanceFromLastTask >= Settings.PathfindingNodeDistance)  // 8.16
 						if (distanceFromLastTask >= Settings.PathfindingNodeDistance && distanceMoved < Settings.ClearPathDistance.Value)
 							tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
 					}
@@ -241,8 +241,12 @@ namespace Alpha
 					else if (Settings.IsCloseFollowEnabled.Value)
 					{
 						//Close follow logic. We have no current tasks. Check if we should move towards leader
-						if (distanceFromFollower >= Settings.PathfindingNodeDistance.Value)
+						var distanceMoved = Vector3.Distance(lastTargetPosition, followTarget.Pos);
+						if (distanceFromFollower >= Settings.PathfindingNodeDistance.Value && distanceMoved < Settings.ClearPathDistance.Value)
 							tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
+						/*if (distanceFromFollower >= Settings.PathfindingNodeDistance.Value)
+							tasks.Add(new TaskNode(followTarget.Pos, Settings.PathfindingNodeDistance));
+						8.16 */ 
 					}
 
 					//Check if we should add quest loot logic. We're close to leader already
